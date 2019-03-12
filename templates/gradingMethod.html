@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script>
+ function enable() {
+     console.log(document.getElementById('other').checked)
+     console.log(document.getElementsByClassName('percent'))
+     if (document.getElementById('other').checked == true) {
+     	 percent= document.getElementsByClassName('percent')
+     	 for(var i = 0; i < percent.length; i++){
+             percent[i].disabled = false;
+         }
+     } else {
+     	 percent= document.getElementsByClassName('percent')
+     	 for(var i = 0; i < percent.length; i++){
+             percent[i].disabled = true;
+         }
+     }
+ }
+</script>
+
+<div class='title'>
+    <a href='/'> <img class='logo'></a>
+    <div class='titleLink'>
+    {% if not user %}
+    <a href='/signup'>Signup</a> |
+    <a href='/login'>Login</a>
+    {% else %}
+    <span>Hi, {{user}}!</span> |
+    <a href='/logout'>Logout</a>
+    {% endif %}
+    </div>
+</div>
+
+<div class='wrapperW'>
+<div class='wrapper'>
+<h2>Your Grading Method</h2>
+<div class='info'>
+{{current}}<br><br>
+<form method='post'>
+<label><b>Change your grading method:</b><br><br>
+    <input type='radio' value='fixed' name="radio" onchange="enable()"> Fixed Points<br/><br>
+</label>
+<label>
+    <input type='radio' value='percent' id='other' name='radio' onchange="enable()"> Other<br/><br>
+</label>
+<label>Homework:
+    <input type='text' class='percent' value='{{hmwk}}' name='hmwk' disabled><br/><br>
+</label>
+<label>Tests:
+   <input type='text' class='percent' name='test' value='{{test}}' disabled><br/><br>
+</label>
+<label>Presentations:
+    <input type='text' class='percent' name='pres' value='{{pres}}' disabled><br/><br>
+</label>
+<label>Projects:
+   <input type='text' class='percent' name='proj' value='{{proj}}' disabled><br/><br>
+</label>
+<div style="color:red">{{error}}</div><br>
+<input type='submit'>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

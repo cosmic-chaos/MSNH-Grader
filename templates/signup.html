@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script>
+ function enable() {
+     if (document.getElementById('subject').disabled == false) {
+         document.getElementById('subject').disabled = true;
+     } else {
+         document.getElementById('subject').disabled = false;
+     }
+ }
+</script>
+
+<div class='title'>
+    <a href='/'> <img class='logo'></a>
+    <div class='titleLink'>
+    {% if not user %}
+    <a href='/signup'>Signup</a> |
+    <a href='/login'>Login</a>
+    {% else %}
+    <span>Hi, {{user}}!</span> |
+    <a href='/logout'>Logout</a>
+    {% endif %}
+    </div>
+</div>
+
+<div class='wrapperW'>
+<div class='wrapper'>
+<h2>Sign-Up</h2>
+<div class='info'>
+
+<form method='post'>
+<label>Name:
+    <input type='text' name='username' value='{{username}}'> (Please input only your first name!)<div style="color:red">{{user_error}}</div><br/>
+</label>
+<label>Password:
+    <input type='password' name='password'><div style="color:red">{{password_error}}</div><br/>
+</label>
+<label>Verify Password:
+    <input type='password' name='verify'><div style="color:red">{{verify_error}}</div><br/>
+</label>
+<label>Email:
+    <input type='text' name='email' value='{{email}}'><div style="color:red">{{email_error}}</div><br/>
+</label>
+<label>Are You a Teacher?
+    <br><input type="checkbox" id='teacher' name="teacher" onchange="enable()"> Yes<br><br>
+</label>
+<label>Subject*:
+   <input type='text' id='subject' name='subject' value='{{subject}}' disabled><div style="color:red">{{subject_error}}</div>
+   <p><i style='font-size:18'>*Please separate multiple subjects by a single comma without a space.<br>
+   If you share a subject with a different teacher, make sure you enter the name of the subject the exact same way.</i></p>
+</label>
+<input type='submit'>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

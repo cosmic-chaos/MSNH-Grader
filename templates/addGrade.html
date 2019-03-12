@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='title'>
+    <a href='/'> <img class='logo'></a>
+    <div class='titleLink'>
+    <span>Hi, {{user}}!</span> |
+    <a href='/logout'>Logout</a>
+    </div>
+</div>
+
+<div class='wrapperW'>
+<div class='wrapper'>
+<h2>Add a Grade</h2>
+<div class='info'>
+
+<form method='post'>
+<label>Grade Name:
+    <input type='text' name='gradename' value='{{gradename}}'><br><br>
+</label>
+<label>Grade Type:
+    <select name='variety'>
+      <option value="Homework">Homework</option>
+      <option value="Test">Test</option>
+      <option value="Presentation">Presentation</option>
+      <option value="Project">Project</option>
+      <option value="Extra Credit">Extra Credit</option>
+   </select><br><br>
+</label>
+<label>Total Points Possible:
+    <input type='text' name='points_possible' value='{{points_possible}}'><div style="color:red">{{possible_error}}</div><br/>
+</label>
+{% if students %}
+{% for i,s in students %}
+<label>Points {{s.user}} Obtained:
+    <input type="text" name="{{s.user}}" value='{% if points_obtained %}{{points_obtained[i]}}{% endif %}'><div style="color:red">{% if obtained_error %}{{obtained_error[i]}}{% endif %}</div><br/>
+</label>
+{% endfor %}
+{% else %}
+<label>Points Obtained:
+    <input type="text" name="points_obtained" value='{{points_obtained}}'><div style="color:red">{{obtained_error}}</div><br/>
+</label>
+{% endif %}
+<input type='submit'>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

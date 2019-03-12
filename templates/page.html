@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='title'>
+    <a href='/'> <img class='logo'></a>
+    <div class='titleLink'>
+    {% if not user %}
+    <a href='/signup'>Signup</a> |
+    <a href='/login'>Login</a> |
+    {% else %}
+    <span>Hi, {{user}}!</span> |
+    <a href='/logout'>Logout</a> 
+    {% endif %}
+    </div>
+</div>
+    
+<div class='wrapperW'>
+<div class='wrapper'>
+<h2>{{url}}</h2>
+<div class='info' style="overflow:auto;">
+{{link | safe}}
+<table>
+<tr id='header'>
+<td>Date</td>
+<td>Name</td>
+<td>Type</td>
+<td>Possible Points</td>
+<td>Points Obtained</td>
+<td>Grade</td>
+<td>Letter Grade</td>
+</tr>
+{{table | safe}}
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='title'>
+    <a href='/'> <img class='logo'></a>
+    <div class='titleLink'>
+    {% if not user %}
+    <a href='/signup'>Signup</a> |
+    <a href='/login'>Login</a>
+    {% else %}
+    <span>Hi, {{user}}!</span> |
+    <a href='/logout'>Logout</a>
+    {% endif %}
+    </div>
+</div>
+    
+<div class='wrapperW'>
+<div class='wrapper'>
+<h2>{{title}}</h2>
+<div class='info'>
+{{text | safe}}
+{{link | safe}}<br><br>
+{{table | safe}}
+</div>
+</div>
+</div>
+{% endblock %}
